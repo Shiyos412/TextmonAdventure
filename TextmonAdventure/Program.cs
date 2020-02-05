@@ -12,16 +12,8 @@ namespace TextmonAdventure
             //Console.WindowHeight = Console.LargestWindowHeight;
             Console.Title = "Textmon Adventure Ver .01";
             Story.IntroSequence();
-
-
-
-
-
-            
+            Story.IlexOne();
             Console.ReadLine();
-
-
-
         }
     }
 }
