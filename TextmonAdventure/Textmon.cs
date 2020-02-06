@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TextmonAdventure
 {
@@ -8,44 +9,60 @@ namespace TextmonAdventure
         public string name { get; set; }
         public int lvl { get; set; }
         public int HP { get; set; }
+        public int BaseHP { get; set; }
         public int spd { get; set; }
         public int str { get; set; }
         public int def { get; set; }
         public int xp { get; set; }
-        public int threshold { get; set; }
-        public Textmon(int num)
+        public int Threshold { get; set; }
+        public Dictionary<string, int> moves = new Dictionary<string, int>();
+        /*public Textmon(int num)
         {
             lvl = num;
-            xp = 0;
+            xp = 0;                     This constructor became pointless due to the fact the textmon needs a name
             initializeStats(lvl);
-        }
+        }*/
 
-        public Textmon(string a, int lvl)
+        public Textmon(string a, int level)
         {
             name = a;
-            this.lvl = lvl;
-            this.xp = 0;
-            initializeStats(this.lvl);
+            lvl = level;
+            xp = 0;
+            InitializeStats(lvl);
         }
 
-        private void initializeStats(int lvl)
+        public void InitializeStats(int lvl)
         {
             HP = 5 * lvl;
             str = 2 * lvl;
             spd = lvl / 2;
             def = lvl;
+            Threshold = lvl * 4;
         }
 
-        private void levelUp()
+        
+
+        public void TakeDamage(int damage)
         {
-            if(xp > threshold)
+            HP -= (damage - def);
+        }
+
+        public void Heal()
+        {
+            HP = BaseHP;
+        }
+
+        public void LevelUp()
+        {
+            if(xp > Threshold)
             {
-                threshold += this.lvl;
+                Threshold += lvl * 2;
                 HP += leveling.Next(1, 6);
                 spd += leveling.Next(1, 3);
                 def += leveling.Next(1, 4);
                 str += leveling.Next(1, 5);
                 xp = 0;
+                BaseHP = HP;
             }
             else
             {
