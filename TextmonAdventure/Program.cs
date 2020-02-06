@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Threading;
 
+
+
+//Comments here TODO
 namespace TextmonAdventure
 {
     class Program
